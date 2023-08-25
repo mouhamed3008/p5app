@@ -1,0 +1,62 @@
+models:
+  # ...
+  ArticleConfection:
+    libelle: string:255
+    quantiteStock: integer
+    prix: float
+    reference: string:255
+    photo: binary
+    categorie_id: id foreign:categories
+    relationships:
+      belongsTo: Categorie
+
+  Categorie:
+    libelle: string:255 unique
+    type: string:255
+
+  Fournisseur:
+    libelle: string:255 unique
+
+  ArticleVente:
+    libelle: string:255
+    quantiteStock: integer
+    prix: float
+    reference: string:255
+    photo: binary
+    categorie_id: id foreign:categories
+    relationships:
+      belongsTo: Categorie
+
+  ArticleFournisseur:
+    fournisseur_id: id foreign:fournisseurs
+    article_confection_id: id foreign:article_confections
+    relationships:
+      belongsTo: ArticleConfection, Fournisseur
+
+  VenteConfection:
+    vente_id: id foreign:article_ventes
+    article_confection_id: id foreign:article_confections
+    relationships:
+      belongsTo: ArticleConfection, ArticleVente
+
+controllers:
+  # ...
+  ArticleConfection:
+    resource: api.store, api.update, api.destroy, api.index, api.show
+
+  ArticleVente:
+    resource: api.store, api.update, api.destroy, api.index, api.show
+
+
+  Categorie:
+    resource: api.store, api.update, api.destroy, api.index, api.show
+
+
+  VenteConfection:
+    resource: api.store, api.update, api.destroy, api.index, api.show
+
+  Fournisseur:
+    resource: api.store, api.update, api.destroy, api.index, api.show
+
+
+seeders: Fournisseur Categorie ArticleConfection VenteConfection ArticleVente

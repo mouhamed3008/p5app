@@ -1,0 +1,60 @@
+created:
+    - app/Http/Controllers/ArticleConfectionController.php
+    - app/Http/Controllers/ArticleVenteController.php
+    - app/Http/Controllers/CategorieController.php
+    - app/Http/Controllers/VenteConfectionController.php
+    - app/Http/Controllers/FournisseurController.php
+    - database/factories/ArticleConfectionFactory.php
+    - database/factories/CategorieFactory.php
+    - database/factories/FournisseurFactory.php
+    - database/factories/ArticleVenteFactory.php
+    - database/factories/ArticleFournisseurFactory.php
+    - database/factories/VenteConfectionFactory.php
+    - database/migrations/2023_08_25_144114_create_article_confections_table.php
+    - database/migrations/2023_08_25_144115_create_categories_table.php
+    - database/migrations/2023_08_25_144116_create_fournisseurs_table.php
+    - database/migrations/2023_08_25_144117_create_article_ventes_table.php
+    - database/migrations/2023_08_25_144118_create_article_fournisseurs_table.php
+    - database/migrations/2023_08_25_144119_create_vente_confections_table.php
+    - app/Models/ArticleConfection.php
+    - app/Models/Categorie.php
+    - app/Models/Fournisseur.php
+    - app/Models/ArticleVente.php
+    - app/Models/ArticleFournisseur.php
+    - app/Models/VenteConfection.php
+    - database/seeders/FournisseurCategorieArticleConfectionVenteConfectionArticleVenteSeeder.php
+    - tests/Feature/Http/Controllers/ArticleConfectionControllerTest.php
+    - tests/Feature/Http/Controllers/ArticleVenteControllerTest.php
+    - tests/Feature/Http/Controllers/CategorieControllerTest.php
+    - tests/Feature/Http/Controllers/VenteConfectionControllerTest.php
+    - tests/Feature/Http/Controllers/FournisseurControllerTest.php
+    - app/Http/Requests/ArticleConfectionStoreRequest.php
+    - app/Http/Requests/ArticleConfectionUpdateRequest.php
+    - app/Http/Requests/ArticleVenteStoreRequest.php
+    - app/Http/Requests/ArticleVenteUpdateRequest.php
+    - app/Http/Requests/CategorieStoreRequest.php
+    - app/Http/Requests/CategorieUpdateRequest.php
+    - app/Http/Requests/VenteConfectionStoreRequest.php
+    - app/Http/Requests/VenteConfectionUpdateRequest.php
+    - app/Http/Requests/FournisseurStoreRequest.php
+    - app/Http/Requests/FournisseurUpdateRequest.php
+    - app/Http/Resources/ArticleConfectionCollection.php
+    - app/Http/Resources/ArticleConfectionResource.php
+    - app/Http/Resources/ArticleVenteCollection.php
+    - app/Http/Resources/ArticleVenteResource.php
+    - app/Http/Resources/CategoryCollection.php
+    - app/Http/Resources/CategorieResource.php
+    - app/Http/Resources/VenteConfectionCollection.php
+    - app/Http/Resources/VenteConfectionResource.php
+    - app/Http/Resources/FournisseurCollection.php
+    - app/Http/Resources/FournisseurResource.php
+updated:
+    - routes/api.php
+models:
+    User: {  }
+    ArticleConfection: { libelle: 'string:255', quantiteStock: integer, prix: float, reference: 'string:255', photo: binary, categorie_id: 'id foreign:categories', relationships: { belongsTo: Categorie } }
+    Categorie: { libelle: 'string:255 unique', type: 'string:255' }
+    Fournisseur: { libelle: 'string:255 unique' }
+    ArticleVente: { libelle: 'string:255', quantiteStock: integer, prix: float, reference: 'string:255', photo: binary, categorie_id: 'id foreign:categories', relationships: { belongsTo: Categorie } }
+    ArticleFournisseur: { fournisseur_id: 'id foreign:fournisseurs', article_confection_id: 'id foreign:article_confections', relationships: { belongsTo: 'ArticleConfection, Fournisseur' } }
+    VenteConfection: { vente_id: 'id foreign:article_ventes', article_confection_id: 'id foreign:article_confections', relationships: { belongsTo: 'ArticleConfection, ArticleVente' } }
